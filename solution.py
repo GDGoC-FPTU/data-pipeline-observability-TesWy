@@ -77,12 +77,12 @@ def validate(data):
         price = record.get('price', 0)
         category = record.get('category', '')
 
-        if price > 0 and category:
-            valid_records.append(record)
-        else:
+        if price <= 0 or not category or category.strip() == '':
             error_count += 1
+        else:
+            valid_records.append(record)
 
-    print(f"Validation complete. Valid: {len(valid_records)}, Errors: {error_count}")
+    print(f"Validation complete. {len(valid_records)} valid, {error_count} dropped.")
     return valid_records
 
 
